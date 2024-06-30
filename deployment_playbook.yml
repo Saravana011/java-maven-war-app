@@ -1,6 +1,6 @@
 ---
 - name: deployment
-  hosts: webserver
+  hosts: all
   become: true
 
   vars:
