@@ -1,6 +1,6 @@
 ---
 - name: deployment
-  hosts: all
+  hosts: 3.6.92.78
   become: true
 
   vars:
