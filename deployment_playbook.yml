@@ -20,7 +20,7 @@
       password: abc123
 
   - name: Rename war file
-    ansible.builtin.shell: mv /home/ec2-user/hello-world-war-2.0.0-31.war  /home/ec2-user/faangler.war
+    ansible.builtin.shell: mv /home/ec2-user/hello-world-war-2.0.0-36.war  /home/ec2-user/faangler.war
 
   - name: Deploying artifact in webapps
     ansible.builtin.shell: cp /home/ec2-user/faangler.war /opt/apache_tomcat/webapps/faangler.war
