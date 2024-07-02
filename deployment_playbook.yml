@@ -4,12 +4,12 @@
   become: true
 
   vars:
-    nexus_url: http:ec2-15-206-211-124.ap-south-1.compute.amazonaws.com:8081/repository
+    nexus_url: http:ec2-15-206-90-4.ap-south-1.compute.amazonaws.com:8081/repository
     repository_type: java-maven-war-app-release
     group_id: com%2Fmycompany%2Fapp
     artifact_id: hello-world-war
     version: 2.0.0
-    build_number: "{{build_number}}"
+    build_number: 47
   tasks:
   - name: Download file from a file path
     ansible.builtin.get_url:
@@ -20,7 +20,7 @@
       password: abc123
 
   - name: Rename war file
-    ansible.builtin.shell: mv /home/ec2-user/hello-world-war-2.0.0-36.war  /home/ec2-user/faangler.war
+    ansible.builtin.shell: mv /home/ec2-user/hello-world-war-2.0.0-47.war  /home/ec2-user/faangler.war
 
   - name: Deploying artifact in webapps
     ansible.builtin.shell: cp /home/ec2-user/faangler.war /opt/apache_tomcat/webapps/faangler.war
