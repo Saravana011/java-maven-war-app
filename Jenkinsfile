@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label 'Main'
+        label 'Build-In Node'
     }
 
     tools {
