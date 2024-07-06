@@ -18,7 +18,7 @@
       password: abc123
 
   - name: Rename war file
-    ansible.builtin.shell: mv /home/ec2-user/saravana/{{group_id}}%2F{{artifact_id}}%2F{{version}}-{{build_number}}%2F{{artifact_id}}-{{version}}-{{ build_number}}.war /home/ec2-user/viven/hello-world.war
+    ansible.builtin.shell: mv /home/ec2-user/saravana/{{group_id}}%2F{{artifact_id}}%2F{{version}}-{{build_number}}%2F{{artifact_id}}-{{version}}-{{ build_number}}.war /home/ec2-user/saravana/hello-world.war
 
   - name: Deploying artifact in webapps
     ansible.builtin.shell: cp /home/ec2-user/saravana/hello-world.war /opt/apache-tomcat-9.0.90/webapps/hello-world.war
