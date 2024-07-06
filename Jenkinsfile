@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label 'Build-InNode'
+        label 'master'
     }
 
     tools {
@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('SCM Checkout'){
             steps{
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/DevOps-SVC04/java-maven-war-app.git']])
+                checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Saravana011/java-maven-war-app.git']])
             }
 
         }
@@ -21,17 +21,17 @@ pipeline{
             }
         }
 
-        // stage('Sonar Scan'){
-        //     steps{
-        //         withSonarQubeEnv("SonarQube") {
-        //             sh "${tool("Sonar_4.8")}/bin/sonar-scanner \
-        //             -Dsonar.host.url=http://ec2-13-232-201-247.ap-south-1.compute.amazonaws.com:9000/ \
-        //             -Dsonar.login=sqp_0c07fd0d029a2928a7f9a656ce9486e029a7affa \
-        //             -Dsonar.java.binaries=target \
-        //             -Dsonar.projectKey=java-maven-app"
-        //         }
-        //     }
-        // }
+        stage('Sonar Scan'){
+            steps{
+                withSonarQubeEnv("SonarQube") {
+                    sh "${tool("Sonar_scanner")}/bin/sonar-scanner \
+                    -Dsonar.host.url=http://13.233.155.38:9000/ \
+                    -Dsonar.login=sqp_1c6565f000b3e18a80fc4101eedf5535f6eed7b6 \
+                    -Dsonar.projectKey=java-maven-war-app \
+                    -Dsonar.java.binaries=target \
+                }
+            }
+        }
 
         stage('Nexus Upload'){
             steps{
@@ -41,7 +41,7 @@ pipeline{
 
         stage('deployment'){
             agent{
-                label 'Ansible'
+                label 'agent'
             }
             steps{
                 sh 'ansible-playbook -i inventory deployment_playbook.yml -e "build_number=${BUILD_NUMBER}"'
