@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label 'master'
+        label 'agent'
     }
 
     tools {
@@ -23,7 +23,7 @@ pipeline{
 
         stage('Sonar Scan'){
             steps{
-                withSonarQubeEnv("SonarQube") {
+                withSonarQubeEnv("Sonarqube") {
                     sh "${tool("Sonar_5.0.1")}/bin/sonar-scanner \
                     -Dsonar.host.url=http://13.233.155.38:9000/ \
                     -Dsonar.login=sqp_1c6565f000b3e18a80fc4101eedf5535f6eed7b6 \
@@ -40,9 +40,6 @@ pipeline{
         }
 
         stage('deployment'){
-            agent{
-                label 'agent'
-            }
             steps{
                 sh 'ansible-playbook -i inventory deployment_playbook.yml -e "build_number=${BUILD_NUMBER}"'
             }
