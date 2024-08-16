@@ -4,7 +4,7 @@ pipeline{
     }
 
     tools {
-        maven 'Maven_3.9.8'
+        maven 'Maven_3.9.6'
     }
 
     stages{
@@ -25,7 +25,7 @@ pipeline{
             steps{
                 withSonarQubeEnv("Sonarqube") {
                     sh "${tool("Sonar_5.0.1")}/bin/sonar-scanner \
-                    -Dsonar.host.url=http://13.233.155.38:9000/ \
+                    -Dsonar.host.url=http://13.127.24.131:9000/ \
                     -Dsonar.login=sqp_1c6565f000b3e18a80fc4101eedf5535f6eed7b6 \
                     -Dsonar.java.binaries=target \
                     -Dsonar.projectKey=java-maven-war-app" 
