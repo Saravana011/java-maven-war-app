@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label 'agent'
+        label 'agentm'
     }
 
     tools {
@@ -24,9 +24,9 @@ pipeline{
         stage('Sonar Scan'){
             steps{
                 withSonarQubeEnv("Sonarqube") {
-                    sh "${tool("Sonar_5.0.1")}/bin/sonar-scanner \
+                    sh "${tool("Sonarqube_Scn")}/bin/sonar-scanner \
                     -Dsonar.host.url=http://13.127.24.131:9000/ \
-                    -Dsonar.login=sqp_1c6565f000b3e18a80fc4101eedf5535f6eed7b6 \
+                    -Dsonar.login=sqp_6da2375185e82f02c2282309920cf9da21f4a515 \
                     -Dsonar.java.binaries=target \
                     -Dsonar.projectKey=java-maven-war-app" 
                 }
